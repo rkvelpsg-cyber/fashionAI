@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function Home(){return <main className="min-h-screen grid place-items-center p-8"><div className="text-center"><h1 className="text-5xl font-bold">Lotus AI Fashion Mirror</h1><p className="mt-4 text-white/60">Clothing virtual try-on MVP</p><Link href="/kiosk" className="inline-block mt-8 rounded-full bg-white text-black px-10 py-5 text-xl font-semibold">Open Kiosk</Link></div></main>}
