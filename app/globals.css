@@ -39,3 +39,26 @@ button {
     background-color 200ms ease,
     border-color 200ms ease;
 }
+
+@keyframes luxuryPulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(197, 153, 94, 0.22);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 14px 36px rgba(197, 153, 94, 0.32);
+    filter: brightness(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

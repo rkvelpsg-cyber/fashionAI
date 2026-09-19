@@ -12,7 +12,6 @@ const FASHN_RUN_ENDPOINT = "https://api.fashn.ai/v1/run";
 const FASHN_STATUS_ENDPOINT = "https://api.fashn.ai/v1/status";
 const SAREE_PROMPT =
   "Place the referenced traditional Indian saree on the person. Preserve the original green silk fabric, gold motifs and gold border. Use a traditional Nivi saree drape with a matching fitted blouse, front waist pleats, full-length saree extending to the feet, and pallu naturally draped over the left shoulder. Preserve the person's identity, face, body proportions, pose and background.";
-
 export interface VirtualTryOnProvider {
   generate(request: VirtualTryOnRequest): Promise<VirtualTryOnResult>;
 }
@@ -26,28 +25,16 @@ export class FashnTryOnProvider implements VirtualTryOnProvider {
     const fashnMode =
       request.garmentType === "shirt" ? "quality" : request.mode;
 
-    if (request.garmentType !== "saree") {
-      console.info(
-        `[TryOn:Garment] sku: ${request.productSku ?? "MISSING"} garmentType: ${request.garmentType} fashnCategory: ${fashnCategory} model: tryon-v1.6 customerImage: ORIGINAL garmentImage: ${safeImagePath(request.garmentImage)} mode: ${fashnMode} requestStarted: true`,
-      );
-    }
-
     return generateTryOn({
       customerImage: request.customerImage,
       garmentImage: request.garmentImage,
+      garmentSource: request.garmentSource,
       garmentType: request.garmentType,
       productSku: request.productSku,
+      productColour: request.productColour,
       category: fashnCategory,
       mode: fashnMode,
     });
-  }
-}
-
-function safeImagePath(image: string) {
-  try {
-    return new URL(image).pathname;
-  } catch {
-    return image;
   }
 }
 
@@ -181,15 +168,10 @@ export class FashnTryOnMaxProvider implements VirtualTryOnProvider {
 
 export class VirtualTryOnRouter {
   constructor(
-    private readonly providers: Record<GarmentType, VirtualTryOnProvider> = {
+    private readonly providers: Partial<
+      Record<GarmentType, VirtualTryOnProvider>
+    > = {
       saree: new SareeTryOnProvider(),
-      kurti: new FashnTryOnProvider(),
-      dress: new FashnTryOnProvider(),
-      lehenga: new FashnTryOnProvider(),
-      shirt: new FashnTryOnProvider(),
-      tshirt: new FashnTryOnProvider(),
-      top: new FashnTryOnProvider(),
-      bottom: new FashnTryOnProvider(),
     },
   ) {}
 
