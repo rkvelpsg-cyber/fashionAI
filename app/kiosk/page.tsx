@@ -427,6 +427,7 @@ export default function Kiosk() {
                 loop
                 muted
                 playsInline
+                preload="auto"
                 onError={() => setVideoError(true)}
               />
             ) : (
@@ -700,7 +701,7 @@ export default function Kiosk() {
             </div>
 
             <div className="mt-8 grid gap-5 sm:mt-10 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {availableSarees.map((product) => (
+              {availableSarees.map((product, index) => (
                 <article
                   key={product.id}
                   className="catalogue-card group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[#d6b36a]/20 bg-[#100d0a]/94 shadow-[0_12px_35px_rgba(0,0,0,0.2)]"
@@ -709,6 +710,8 @@ export default function Kiosk() {
                     <img
                       src={productImage(product)}
                       alt={product.name}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
                       className="aspect-[4/5] w-full object-contain transition-transform duration-200 ease-out"
                     />
                   </div>
@@ -881,6 +884,8 @@ export default function Kiosk() {
               <img
                 src={previewGeneratedImage}
                 alt="AI generated saree preview"
+                decoding="async"
+                fetchPriority="high"
                 className="max-h-[clamp(14rem,43svh,34rem)] max-w-[min(90vw,56rem)] rounded-[1rem] border border-[#d6b36a]/30 object-contain shadow-[0_12px_40px_rgba(0,0,0,0.25)]"
               />
             </div>

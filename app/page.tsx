@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { preload } from "react-dom";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -14,6 +15,8 @@ const inter = Inter({
 });
 
 export default function Home() {
+  preload("/homepage.jpg", { as: "image", fetchPriority: "high" });
+
   return (
     <main
       className="relative flex min-h-screen items-end justify-center overflow-hidden bg-black px-4 pb-12 pt-10 sm:px-6 lg:px-8"
