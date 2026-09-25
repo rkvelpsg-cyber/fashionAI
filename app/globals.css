@@ -12,12 +12,379 @@ body {
   color: white;
   font-family: "Segoe UI", Arial, sans-serif;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
-  overscroll-behavior: none;
+  overscroll-behavior-y: auto;
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
   text-rendering: optimizeLegibility;
+}
+
+.hero-content {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(2rem, 5vw, 5rem);
+  transform: translateX(-50%);
+}
+
+.hero-eyebrow,
+.hero-heading,
+.hero-subheading,
+.hero-copy,
+.hero-cta,
+.hero-note {
+  animation: heroFadeUp 0.7s ease-out both;
+}
+
+.hero-heading {
+  animation-delay: 0.08s;
+}
+
+.hero-subheading {
+  animation-delay: 0.16s;
+}
+
+.hero-copy {
+  animation-delay: 0.24s;
+}
+
+.hero-cta {
+  animation-delay: 0.32s;
+}
+
+.hero-note {
+  animation-delay: 0.38s;
+}
+
+.welcome-copy,
+.consent-copy,
+.camera-panel-content,
+.review-copy,
+.catalogue-header,
+.result-copy {
+  animation: heroFadeUp 0.8s ease-out both;
+}
+
+.welcome-item {
+  animation: heroFadeUp 0.8s ease-out both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.consent-screen {
+  background-position: center 20%;
+}
+
+.ai-generation-screen {
+  background: radial-gradient(
+    circle at center,
+    #19140e 0%,
+    #0d0b09 50%,
+    #080706 100%
+  );
+}
+
+.ai-generation-glow {
+  width: min(72vw, 42rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(214, 179, 106, 0.1),
+    transparent 68%
+  );
+  animation: aiGlowBreathe 6s ease-in-out infinite;
+}
+
+.ai-saree-loader {
+  position: relative;
+  width: clamp(7.5rem, 10vw, 10rem);
+  aspect-ratio: 1;
+}
+
+.ai-loader-outer,
+.ai-loader-middle,
+.ai-loader-fabric,
+.ai-loader-center {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ai-loader-outer {
+  inset: 0;
+  border: 1px solid rgba(214, 179, 106, 0.75);
+  animation: aiRotateClockwise 14s linear infinite;
+}
+
+.ai-loader-middle {
+  inset: 14%;
+  border: 1px solid transparent;
+  border-top-color: rgba(248, 241, 230, 0.8);
+  border-left-color: rgba(214, 179, 106, 0.7);
+  animation: aiRotateCounterclockwise 8s linear infinite;
+}
+
+.ai-loader-fabric {
+  inset: 27% 13%;
+  border-top: 1px solid rgba(214, 179, 106, 0.65);
+  border-bottom: 1px solid rgba(248, 241, 230, 0.28);
+  transform: rotate(-18deg) skewX(-16deg);
+  animation: aiFabricFlow 5s ease-in-out infinite;
+}
+
+.ai-loader-center {
+  inset: 35%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    circle,
+    rgba(214, 179, 106, 0.34),
+    rgba(214, 179, 106, 0.05) 62%,
+    transparent 72%
+  );
+  animation: aiCenterBreathe 3.8s ease-in-out infinite;
+}
+
+.ai-loader-petal {
+  position: absolute;
+  width: 38%;
+  height: 60%;
+  border: 1px solid rgba(214, 179, 106, 0.8);
+  border-radius: 100% 0 100% 0;
+}
+
+.ai-loader-petal-top {
+  top: 2%;
+  transform: rotate(-45deg);
+}
+
+.ai-loader-petal-right {
+  right: 2%;
+  transform: rotate(45deg);
+}
+
+.ai-loader-petal-bottom {
+  bottom: 2%;
+  transform: rotate(135deg);
+}
+
+.ai-loader-petal-left {
+  left: 2%;
+  transform: rotate(-135deg);
+}
+
+.ai-status-message {
+  animation: aiStatusFade 450ms ease-out both;
+}
+
+.ai-progress-track {
+  position: relative;
+  width: min(70vw, 26.25rem);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ai-progress-track span {
+  position: absolute;
+  inset-block: 0;
+  width: 34%;
+  background: #d6b36a;
+  animation: aiProgressTravel 2.6s ease-in-out infinite;
+}
+
+@keyframes aiRotateClockwise {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aiRotateCounterclockwise {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes aiFabricFlow {
+  0%,
+  100% {
+    transform: rotate(-18deg) skewX(-16deg) translateX(-5%);
+  }
+  50% {
+    transform: rotate(-9deg) skewX(12deg) translateX(5%);
+  }
+}
+
+@keyframes aiCenterBreathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.72;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes aiGlowBreathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.58;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes aiStatusFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aiProgressTravel {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(420%);
+  }
+}
+
+@media (orientation: portrait) {
+  .camera-screen {
+    display: block;
+  }
+
+  .camera-preview {
+    position: relative;
+    inset: auto;
+    min-height: 68svh;
+    height: 68svh;
+  }
+
+  .camera-panel {
+    position: relative;
+    inset: auto;
+    display: flex;
+    min-height: 32svh;
+    max-height: none;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (orientation: portrait) {
+  .ai-saree-loader {
+    width: clamp(8.5rem, 16vw, 11.875rem);
+  }
+
+  .result-actions {
+    grid-template-columns: 1fr;
+    max-width: 24rem;
+    margin-inline: auto;
+  }
+}
+
+@media (hover: hover) {
+  .catalogue-card {
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .catalogue-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(214, 179, 106, 0.45);
+  }
+
+  .catalogue-card:hover img {
+    transform: scale(1.015);
+  }
+}
+
+@media (orientation: portrait) and (max-height: 1100px) {
+  .camera-preview {
+    min-height: 60svh;
+    height: 60svh;
+  }
+
+  .camera-panel {
+    min-height: 40svh;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 480px) {
+  .camera-panel {
+    padding: 1rem;
+  }
+
+  .camera-panel-content > h2 {
+    margin-top: 0.75rem;
+  }
+
+  .camera-panel-content > h2 + p {
+    margin-top: 0.75rem;
+  }
+
+  .camera-panel-content > p + button {
+    margin-top: 1rem;
+  }
+}
+
+@media (orientation: portrait) {
+  .hero-content {
+    bottom: clamp(2.2rem, 8vw, 5rem);
+    width: min(90vw, 640px);
+  }
+
+  .consent-screen {
+    background-position: center 12%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow,
+  .hero-heading,
+  .hero-subheading,
+  .hero-copy,
+  .hero-cta,
+  .hero-note,
+  .welcome-copy,
+  .consent-copy,
+  .camera-panel-content,
+  .review-copy,
+  .catalogue-header,
+  .result-copy,
+  .ai-generation-glow,
+  .ai-loader-outer,
+  .ai-loader-middle,
+  .ai-loader-fabric,
+  .ai-loader-center,
+  .ai-status-message,
+  .ai-progress-track span,
+  .welcome-item {
+    animation: none !important;
+  }
 }
 
 * {
